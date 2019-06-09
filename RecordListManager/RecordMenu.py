@@ -1,15 +1,14 @@
 import csv
 import RecordEditFunctions
 import RecordQueryFunctions
+
 from RecordEditFunctions import createRecord
 from RecordEditFunctions import loadRecordList
 from RecordEditFunctions import removeRecord
 from RecordEditFunctions import saveRecordList
 from RecordEditFunctions import sortRecordList
-from RecordQueryFunctions import listRecordsByArtist
-from RecordQueryFunctions import listRecordsWithDuplicates
-from RecordQueryFunctions import printTotalRecordCount
-from RecordQueryFunctions import printUniqueRecordCount
+from RecordEditFunctions import editRecord
+from RecordQueryFunctions import *
 
 
 
@@ -25,13 +24,19 @@ def runListEditMenu(records):
     #The user's choice for the edit submenu
     editChoice = ""
 
+    #Boolean to track when the user has modified the list since saving
+    listModified = False
+
     #Run the edit list menu until the user exits
-    while (editChoice != "4"):
+    while (editChoice != "7"):
         print("Edit Menu: Select one of the options below.")
         print("1: Add a record to the list.")
         print("2: Remove a record from the list.")
-        print("3: Save record list.")
-        print("4: Return to main menu")
+        print("3: Change a record's manufacturing label.")
+        print("4: Change a record's release year.")
+        print("5: Set a record's additional information.")
+        print("6: Save record list.")
+        print("7: Return to main menu")
 
         #Get the user's menu choice
         editChoice = input()
@@ -39,17 +44,45 @@ def runListEditMenu(records):
         #MENU OPTION ONE: Add record to list
         if editChoice == "1":
             createRecord(records)
+            listModified = True
 
         #MENU OPTION TWO: Remove record from list
         elif editChoice == "2":
             removeRecord(records)
+            listModified = True
 
-        #MENU OPTION THREE: Save the current record list to a file
+        #MENU OPTION THREE: Change a record's manufacturing label
         elif editChoice == "3":
-            saveRecordList(records)
+            editRecord(records, "Label")
+            listModified = False
 
-        #MENU OPTION FOUR: Return to the main menu
+        #MENU OPTION FOUR: Change a record's release year
         elif editChoice == "4":
+            editRecord(records, "Year")
+            listModified = False
+
+        #MENU OPTION FIVE: Set a record's additional information
+        elif editChoice == "5":
+            editRecord(records, "Additional")
+            listModified = False
+
+        #MENU OPTION SIX: Save the current record list to a file
+        elif editChoice == "6":
+            saveRecordList(records)
+            listModified = False
+
+        #MENU OPTION SEVEN: Return to the main menu
+        elif editChoice == "7":
+            
+            #If the list has unsaved changes, prompt the user to save them
+            if (listModified == True):
+                print("Would you like to save your list changes before exiting? Y (Yes) or any other key (No)")
+                saveChoice = input()
+
+                #Save the list
+                if (saveChoice == 'Y' or saveChoice == 'y'):
+                    saveRecordList(records)
+
             print("Returning to main menu.")
 
         #Invalid menu options are ignored
@@ -73,13 +106,14 @@ def runListQueryMenu(records):
     queryChoice = ""
 
     #Continue to prompt the user until exit
-    while (queryChoice != "5"):
-        print("Query Menu: Select one of the queries below.")
+    while (queryChoice != "6"):
+        print("Query Menu: Select one of the queries below, or exit.")
         print("1: List the records for a given artist.")
-        print("2: List all of the records with duplicates.")
-        print("3: List the total number of records in the list.")
-        print("4: List the number of unique records in the list.")
-        print("5: Return to main menu.")
+        print("2: List the records released in a certain year.")
+        print("3: List all of the records with duplicates.")
+        print("4: List the total number of records in the list.")
+        print("5: List the number of unique records in the list.")
+        print("6: Return to main menu.")
 
         #Get the user's query choice
         queryChoice = input()
@@ -88,20 +122,32 @@ def runListQueryMenu(records):
         if (queryChoice == "1"):
             listRecordsByArtist(records)
 
-        #MENU CHOICE TWO: List the records with duplicate copies
+        #MENU CHOICE TWO: List the records for a given release year
         elif (queryChoice == "2"):
+            print("Please enter the album release year to search for.")
+
+            #Verify the year to search with
+            try:
+                queryYear = int(input)
+                listRecordsByYear(records, queryYear)
+
+            except ValueError:
+                print("The year to search for is invalid. Please try again.")
+
+        #MENU CHOICE THREE: List the records with duplicate copies
+        elif (queryChoice == "3"):
             listRecordsWithDuplicates(records)
 
-        #MENU CHOICE THREE: Print the total count of records in the list
-        elif (queryChoice == "3"):
+        #MENU CHOICE FOUR: Print the total count of records in the list
+        elif (queryChoice == "4"):
             printTotalRecordCount(records)
 
-        #MENU CHOICE FOUR: Print the total count of unique records in the list
-        elif (queryChoice == "4"):
-            printUniqueRecordCount(records)
-            
-        #MENU CHOICE FIVE: Return to the main menu
+        #MENU CHOICE FIVE: Print the total count of unique records in the list
         elif (queryChoice == "5"):
+            printUniqueRecordCount(records)
+
+        #MENU CHOICE SIX: Return to the main menu
+        elif (queryChoice == "6"):
             print("Returning to the main menu.")
 
         #Invalid choices are ignored
@@ -233,13 +279,5 @@ def runStartupMenu():
     #Run the main menu once the user has started a list
     runMainMenu(records)
 
-
-
 #Run the startup menu to begin the program
 runStartupMenu()
-            
-
-
-
-
-
