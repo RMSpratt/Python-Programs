@@ -22,7 +22,7 @@ def listRecordsByArtist(records):
         #Print each matching record
         if (rec.artist == artistChoice):
             print("Title: " + rec.title)
-            print("Quantity: " + rec.quantity)
+            print("Quantity: " + str(rec.quantity))
             print("")
             numRecords = numRecords + 1
 
@@ -33,6 +33,36 @@ def listRecordsByArtist(records):
 
 
 """
+    Name: listRecordsByYear
+    Description: This function lists any records for a given release year.
+
+    Parameter: records          The list of records
+    Parameter: year             The year to search for
+    No return value
+"""
+def listRecordsByYear(records, year):
+
+    #Counter of the number of records that matched the query
+    recordCount = 0
+
+    print("The list of records released in the year " + year + " are below:")
+
+    #Iterate through the list of records
+    for rec in records:
+
+        #If the record's release year matches the year we're looking for, print the record info
+        if (rec.releaseYear == year):
+            print("Artist: " + rec.artist)
+            print("Title: " + rec.title)
+            recordCount = recordCount + 1
+
+    #If no records were released for the given year, inform the user
+    if (recordCount == 0):
+        print("There were no records in the list for the given year.")
+
+    
+
+"""
     Name: listRecordsWithDuplicates
     Description: This function lists any records in the given list that have duplicates.
 
@@ -40,6 +70,10 @@ def listRecordsByArtist(records):
     No return value
 """
 def listRecordsWithDuplicates(records):
+
+    #Counter of the number of records that matched the query
+    recordCount = 0
+
     print("The list of records with duplicate copies are listed below:")
 
     #Iterate through the list of records
@@ -49,7 +83,12 @@ def listRecordsWithDuplicates(records):
         if (rec.quantity > 1):
             print("Artist: " + rec.artist)
             print("Title: " + rec.title)
-            print("Quantity: " + int(rec.quantity))
+            print("Quantity: " + str(rec.quantity))
+            recordCount = recordCount + 1
+
+    #If no records had duplicates, inform the user
+    if (recordCount == 0):
+        print("There were no records in the list with duplicate copies.")
 
 
 
