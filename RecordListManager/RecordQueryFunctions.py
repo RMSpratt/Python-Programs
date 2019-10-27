@@ -5,22 +5,18 @@
     Parameter: records          The list of records
     Return: No return value
 """
-def listRecordsByArtist(records):
-    print("Please enter the name of the artist to list the records of.")
-
-    #The user's selection of the artist to search for
-    artistChoice = input()
+def listRecordsByArtist(records, artist):
 
     #The number of records for the given artist
     numRecords = 0
 
-    print("The list of records by " + artistChoice + " are listed below.")
+    print("The list of records by " + artist+ " are listed below.")
 
     #Iterate through the list of records to search for the ones matching the artist
     for rec in records:
 
         #Print each matching record
-        if (rec.artist == artistChoice):
+        if (rec.artist == artist):
             print("Title: " + rec.title)
             print("Quantity: " + str(rec.quantity))
             print("")
@@ -28,7 +24,7 @@ def listRecordsByArtist(records):
 
     #If no records were found for the given artist, inform the user
     if (numRecords == 0):
-        print("There are no records by " + artistChoice + " in the list of records.")
+        print("There are no records by " + artist + " in the list of records.")
 
 
 
@@ -45,15 +41,16 @@ def listRecordsByYear(records, year):
     #Counter of the number of records that matched the query
     recordCount = 0
 
-    print("The list of records released in the year " + year + " are below:")
+    print("The list of records released in the year " + str(year) + " are below:")
 
     #Iterate through the list of records
     for rec in records:
 
         #If the record's release year matches the year we're looking for, print the record info
-        if (rec.releaseYear == year):
+        if (rec.releaseYear == str(year)):
             print("Artist: " + rec.artist)
             print("Title: " + rec.title)
+            print("")
             recordCount = recordCount + 1
 
     #If no records were released for the given year, inform the user
@@ -84,6 +81,7 @@ def listRecordsWithDuplicates(records):
             print("Artist: " + rec.artist)
             print("Title: " + rec.title)
             print("Quantity: " + str(rec.quantity))
+            print("")
             recordCount = recordCount + 1
 
     #If no records had duplicates, inform the user

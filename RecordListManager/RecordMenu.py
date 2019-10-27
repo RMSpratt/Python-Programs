@@ -40,6 +40,7 @@ def runListEditMenu(records):
 
         #Get the user's menu choice
         editChoice = input()
+        print("")
 
         #MENU OPTION ONE: Add record to list
         if editChoice == "1":
@@ -117,18 +118,28 @@ def runListQueryMenu(records):
 
         #Get the user's query choice
         queryChoice = input()
+        print("")
 
         #MENU CHOICE ONE: List the records for a given artist
         if (queryChoice == "1"):
-            listRecordsByArtist(records)
+
+            #Get the user's selection of the artist to search for
+            artistChoice = input("Please enter the name of the artist to list the records of. \n")
+            print("")
+
+            #Call the query function
+            listRecordsByArtist(records, artistChoice)
 
         #MENU CHOICE TWO: List the records for a given release year
         elif (queryChoice == "2"):
             print("Please enter the album release year to search for.")
 
-            #Verify the year to search with
+            #Verify that the year entered is an integer
             try:
-                queryYear = int(input)
+                queryYear = int(input())
+                print("")
+
+                #Call the query function
                 listRecordsByYear(records, queryYear)
 
             except ValueError:
@@ -181,6 +192,7 @@ def runMainMenu(records):
 
         #Get the user's menu choice
         mainChoice = input()
+        print("")
 
         #MENU CHOICE ONE: Launch Edit submenu
         if (mainChoice == "1"):
@@ -259,6 +271,7 @@ def runStartupMenu():
 
         #Get the user's menu choice
         startupChoice = input()
+        print("")
 
         #MENU CHOICE ONE: Start a new list
         if (startupChoice == "1"):
