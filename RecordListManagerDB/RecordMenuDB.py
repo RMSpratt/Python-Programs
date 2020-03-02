@@ -1,16 +1,16 @@
 import csv
 import getpass
 
-import RecordEditFunctions
-from RecordEditFunctions import addRecord
-from RecordEditFunctions import createDatabaseConnection
-from RecordEditFunctions import editRecord
-from RecordEditFunctions import loadCSVRecordList
-from RecordEditFunctions import removeRecord
-from RecordEditFunctions import saveRecordListCSV
+import RecordEditFunctionsDB
+from RecordEditFunctionsDB import addRecord
+from RecordEditFunctionsDB import createDatabaseConnection
+from RecordEditFunctionsDB import editRecord
+from RecordEditFunctionsDB import loadCSVRecordList
+from RecordEditFunctionsDB import removeRecord
+from RecordEditFunctionsDB import saveRecordListCSV
 
-import RecordQueryFunctions
-from RecordQueryFunctions import *
+import RecordQueryFunctionsDB
+from RecordQueryFunctionsDB import *
 
 
 

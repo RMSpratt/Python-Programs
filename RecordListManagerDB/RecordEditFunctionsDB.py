@@ -4,7 +4,7 @@ import mysql.connector
 
 
 """
-    Name: addRecordToDatabase
+    Name: addRecord
     Description: This function adds a new record to the database table, or updates an existing record's quantity
                  if it already exists in the table.
 
@@ -130,8 +130,8 @@ def addRecord(dbConnection, dbCursor):
 
     Parameter: dbHost         The database's localhost
     Parameter: dbUser         The database username login
-    Parameter: dbPass    The database password
-    Parameter: dbName       The name of the database
+    Parameter: dbPass         The database password
+    Parameter: dbName         The name of the database
 
     Return: The created database connection userDb or None
 """
@@ -267,7 +267,7 @@ def loadCSVRecordList(dbConnection, dbCursor):
     print("Please enter the name of the file to load the list of records from.")
 
     #Get the file to read records in from
-    readFile = input()
+    readFile = input("> ")
     print("")
 
     readFileArray = readFile.split(".")
