@@ -28,15 +28,14 @@ def runMainMenu(dbConnection, dbCursor):
     mainChoice = ""
 
     #Continue to prompt the user until they exit
-    while (mainChoice != "4"):
+    while (mainChoice != "3"):
         print("Main Menu: Select one of the options below.")
         print("1: Launch record list editing menu.")
         print("2: Launch record list query menu.")
-        print("3: Switch to another database.")
-        print("4: Exit")
+        print("3: Exit")
 
         #Get the user's menu choice
-        mainChoice = input()
+        mainChoice = input("> ")
         print("")
 
         #MENU CHOICE ONE: Launch Edit submenu
@@ -49,12 +48,8 @@ def runMainMenu(dbConnection, dbCursor):
             print("Entering the list query menu.")
             runRecordQueryMenu(dbConnection, dbCursor)
 
-        #MENU CHOICE THREE: Prompt to switch to another database
-        elif(mainChoice == '3'):
-            print("Not implemented yet.")
-
-        #MENU CHOICE FOUR: Exit the program
-        elif (mainChoice == '4'):
+        #MENU CHOICE THREE: Exit the program
+        elif (mainChoice == '3'):
             print("Goodbye!")
             dbCursor.close()
             dbConnection.close()
@@ -90,7 +85,7 @@ def runRecordEditMenu(dbConnection, dbCursor):
         print("6: Return to main menu")
 
         #Get the user's selection
-        editChoice = input()
+        editChoice = input("> ")
         print("")
 
         #MENU OPTION ONE: Add a record to the list
@@ -153,7 +148,7 @@ def runRecordQueryMenu(dbConnection, dbCursor):
         print("10: Return to main menu.")
 
         #Get the user's query choice
-        queryChoice = input()
+        queryChoice = input("> ")
         print("")
 
         #MENU OPTION ONE: List records by artist alphabetically
@@ -257,11 +252,11 @@ def runStartupMenu():
 
     #Collect all of the SQL Database information to establish a connection
     print("Please enter your mysql host name.")
-    dbHost = input()
+    dbHost = input("> ")
     print("")
 
     print("Please enter your mysql user name.")
-    dbUser = input()
+    dbUser = input("> ")
     print("")
 
     print("Please enter your mysql password.")
@@ -269,7 +264,7 @@ def runStartupMenu():
     print("")
 
     print("Please enter the name of the database you are using.")
-    dbName = input()
+    dbName = input("> ")
     print("")
 
     #Try to connect to the database with the given information
@@ -293,7 +288,7 @@ def runStartupMenu():
             print("4: Exit the program.")
 
             #Get the user's menu choice
-            startupChoice = input()
+            startupChoice = input("> ")
             print("")
 
             #OPTION ONE: Create a new record list in the database
@@ -333,10 +328,12 @@ def runStartupMenu():
 
             #OPTION FOUR: Exit the main menu
             elif(startupChoice == '4'):
-                print("Goodbye!")
+                print("Goodbye!\n")
                 dbCursor.close()
                 dbConnection.close()
                 return
+
+            print("")
 
         #Once the list has been initialized, (new or existing), start the main menu
         runMainMenu(dbConnection, dbCursor)

@@ -16,7 +16,7 @@ import mysql.connector
 def addRecord(dbConnection, dbCursor):
     
     #Prompt for the record artist
-    newArtist = input("Please enter the record artist.\n")
+    newArtist = input("Please enter the record artist.\n> ")
     print("")
 
     #Get all of the records in the table for the current artist
@@ -29,7 +29,7 @@ def addRecord(dbConnection, dbCursor):
     #If there were records for the given artist, list them
     if (len(currentRecords) > 0):
         print("The records by this artist in the list are listed below.")
-        print("Please enter the index of the album title below if this is an existing record. Otherwise, 0")
+        print("Please enter the index of the album title below if this is an existing record. Otherwise, enter 0 for a new record.")
 
         #Print all of the records
         for i in currentRecords:
@@ -57,16 +57,16 @@ def addRecord(dbConnection, dbCursor):
             #If the user entered an invalid index, this is a new record
                     
             #Get the album title
-            newTitle = input("Please enter the name of the new album.\n")
+            newTitle = input("Please enter the name of the new album.\n> ")
             print("")
 
             #Get the manufacturing label
-            newLabel = input("Please enter the label that published the record, or 'Unknown'.\n")
+            newLabel = input("Please enter the label that published the record, or 'Unknown'.\n> ")
             print("")
 
             try:
                 #Make sure the user enters an integer
-                newYear = int(input("Please enter the album's release year, or 0 if you don't know the year.\n"))
+                newYear = int(input("Please enter the album's release year, or 0 if you don't know the year.\n> "))
                 print("")
 
                 #Add the record to the database table with the passed information
@@ -94,16 +94,16 @@ def addRecord(dbConnection, dbCursor):
         print("There are no records in the list by this artist.")
 
         #Get the album title
-        newTitle = input("Please enter the name of the new album.\n")
+        newTitle = input("Please enter the name of the new album.\n> ")
         print("")
 
         #Get the manufacturing label
-        newLabel = input("Please enter the label that published the record, or 'Unknown'.\n")
+        newLabel = input("Please enter the label that published the record, or 'Unknown'.\n> ")
         print("")
 
         try:
             #Make sure the user enters an integer
-            newYear = int(input("Please enter the album's release year, or 0 if you don't know the year.\n"))
+            newYear = int(input("Please enter the album's release year, or 0 if you don't know the year.\n> "))
             print("")
 
             #Add the record to the database table with the passed information
@@ -147,7 +147,7 @@ def createDatabaseConnection(dbHost, dbUser, dbPass, dbName):
         )
 
         #Return the database connection if successful
-        print("The database was successfully connected to. \n")
+        print("The database was successfully connected to.\n")
 
         return userDB
 
@@ -169,7 +169,7 @@ def createDatabaseConnection(dbHost, dbUser, dbPass, dbName):
 def editRecord(dbConnection, dbCursor, property):
 
     #Prompt for the name of the artist
-    editArtist = input("Please enter the name of the artist.\n")
+    editArtist = input("Please enter the name of the artist.\n> ")
     print("")
 
     #Get all of the records in the table for the current artist
@@ -196,7 +196,7 @@ def editRecord(dbConnection, dbCursor, property):
         try: 
 
             #This holds the user's index selection
-            editIndex = int(input())
+            editIndex = int(input("> "))
             print("")
 
             #Loop through all of the rows for the artist
@@ -207,7 +207,7 @@ def editRecord(dbConnection, dbCursor, property):
 
                     #If the desired property to change is the manufacturing label
                     if (property == "Label"):
-                        newLabel = input("Please enter the record's manufacturing label.\n")
+                        newLabel = input("Please enter the record's manufacturing label.\n> ")
                         print("")
 
                         #Set the record's manufacturing label to the new one
@@ -223,7 +223,7 @@ def editRecord(dbConnection, dbCursor, property):
                     
                         try:
                             #Make sure the user enters an integer
-                            newYear = int(input())
+                            newYear = int(input("> "))
                             print("")
 
                             #Set the record's manufacturing label to the new one
@@ -317,7 +317,8 @@ def loadCSVRecordList(dbConnection, dbCursor):
 
     #If any issues occur populating the database table
     except:
-        print("There was an issue populating the database table from the csv file. Please try again.")
+        print("There was an issue populating the database table from the csv file.")
+        print("Issue occurred when reading row with values: " + row[0] + " " + row[1])
 
 
 
@@ -332,7 +333,7 @@ def loadCSVRecordList(dbConnection, dbCursor):
 def removeRecord(dbConnection, dbCursor):
 
     #Prompt for the artist name
-    removeArtist = input("Enter the artist name of the record to remove.\n")
+    removeArtist = input("Enter the artist name of the record to remove.\n> ")
     print("")
 
     #Get all of the records in the table for the current artist
@@ -396,7 +397,7 @@ def removeRecord(dbConnection, dbCursor):
 def saveRecordListCSV(dbConnection, dbCursor):
 
     #Prompt for the file to write to
-    recordFile = input("Please enter the name of the csv file to write to.\n")
+    recordFile = input("Please enter the name of the csv file to write to.\n> ")
     print("")
 
     fileNameArray = recordFile.split(".")

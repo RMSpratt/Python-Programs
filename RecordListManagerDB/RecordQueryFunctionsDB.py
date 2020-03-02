@@ -10,7 +10,7 @@
 def executeArtistQuery(dbConnection, dbCursor, query):
 
     #Prompt for the name of the artist
-    queryArtist = input("Please enter the name of the artist.\n")
+    queryArtist = input("Please enter the name of the artist.\n> ")
     print("")
 
     #Execute the passed query and get the resulting records
@@ -45,7 +45,7 @@ def executeArtistQuery(dbConnection, dbCursor, query):
 def executeLabelQuery(dbConnection, dbCursor, query):
 
     #Prompt for the name of the record label
-    queryLabel = input("Please enter the name of the record label.\n")
+    queryLabel = input("Please enter the name of the record label.\n> ")
     print("")
 
     #Execute the passed query and get the resulting records
@@ -110,7 +110,7 @@ def retrieveDuplicateRecords(dbConnection, dbCursor, query):
 def retrieveRecordsByYear(dbConnection, dbCursor, query):
     
     #Make sure the user enters an integer
-    queryYear = input("Please enter the release year to search with.\n")
+    queryYear = input("Please enter the release year to search with.\n> ")
     print("")
 
     #Execute the passed query and get the resulting records
