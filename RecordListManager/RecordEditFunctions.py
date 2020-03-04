@@ -44,7 +44,7 @@ class Record():
 def createRecord(records):
 
         #Prompt for the record artist
-        newArtist = input("Please enter the record artist.\n")
+        newArtist = input("Please enter the record artist.\n> ")
         print("")
 
         #Get all of the records in the list for the current artist
@@ -61,7 +61,7 @@ def createRecord(records):
 
             try:
                 #This holds the user's index selection
-                addIndex = int(input())
+                addIndex = int(input("> "))
                 print("")
 
                 #If the user entered an index of an existing record, add it to the list
@@ -73,16 +73,16 @@ def createRecord(records):
                 else:
 
                     #Get the album title
-                    newTitle = input("Please enter the name of the new album.\n")
+                    newTitle = input("Please enter the name of the new album.\n> ")
                     print("")
 
                     #Get the manufacturing label
-                    newLabel = input("Please enter the label that published the record, or 'Unknown'.\n")
+                    newLabel = input("Please enter the label that published the record, or 'Unknown'.\n> ")
                     print("")
 
                     try:
                         #Make sure the user enters an integer
-                        newYear = int(input("Please enter the album's release year, or 0 if you don't know the year.\n"))
+                        newYear = int(input("Please enter the album's release year, or 0 if you don't know the year.\n> "))
                         print("")
 
                         #Create the new record and add it to the list of records
@@ -105,18 +105,18 @@ def createRecord(records):
             print("")
             
             #Prompt for the name of the album
-            newTitle = input("Please enter the name of the new album.\n")
+            newTitle = input("Please enter the name of the new album.\n> ")
             print("")
 
             #Prompt for the album's manufacturing label
-            newLabel = input("Please enter the label that published the record, or 'unknown'.\n")
+            newLabel = input("Please enter the label that published the record, or 'unknown'.\n> ")
             print("")
             
             #Prompt for the album's release year
             try:
 
                 #Make sure the user enters an integer
-                newYear = int(input("Please enter the album's release year or 0 if you don't know the year.\n"))
+                newYear = int(input("Please enter the album's release year or 0 if you don't know the year.\n> "))
                 print("")
 
                 #Create the new record and add it to the list of records
@@ -142,7 +142,7 @@ def createRecord(records):
 def editRecord(records, property):
 
     #Prompt for the name of the artist
-    editArtist = input("Please enter the name of the artist.\n")
+    editArtist = input("Please enter the name of the artist.\n> ")
     print("")
 
     #Retrieve the list of records for the given artist
@@ -164,7 +164,7 @@ def editRecord(records, property):
 
         try:
             #Get the user's index and verify it's an integer
-            addIndex = int(input())
+            addIndex = int(input("> "))
             print("")
 
             #If the user entered a valid index of an existing record, prompt to modify the desired property
@@ -172,7 +172,7 @@ def editRecord(records, property):
 
                 #If the desired property to change is the manufacturing label
                 if (property == "Label"):
-                    newLabel = input("Please enter the record's manufacturing label.\n")
+                    newLabel = input("Please enter the record's manufacturing label.\n> ")
                     print("")
 
                     #Set the record's manufacturing label to the new one
@@ -187,7 +187,7 @@ def editRecord(records, property):
                     
                     try:
                         #Make sure the user enters an integer
-                        newYear = int(input())
+                        newYear = int(input("> "))
                         print("")
 
                         #Set the record's release year to the new one
@@ -201,7 +201,7 @@ def editRecord(records, property):
 
                 #If the desired property to change is the additional information
                 elif (property == "Additional"):
-                    newAdditionalInfo = input("Please enter the record's additional information.\n")
+                    newAdditionalInfo = input("Please enter the record's additional information.\n> ")
                     print("")
 
                     #Set the record's additional information
@@ -262,7 +262,7 @@ def loadRecordList(records):
     print("Please enter the name of the file to load the list of records from.")
 
     #Get the file to read records in from
-    readFile = input()
+    readFile = input("> ")
     print("")
 
     readFileArray = readFile.split(".")
@@ -312,7 +312,7 @@ def loadRecordList(records):
 def removeRecord(records):
     
     #Prompt for the artist name
-    removeArtist = input("Enter the artist name of the record to remove.\n")
+    removeArtist = input("Enter the artist name of the record to remove.\n> ")
     print("")
 
     #Dictionary of the records for the given artist, accessed by their index in the list of records
@@ -332,7 +332,7 @@ def removeRecord(records):
 
         try:
             #Get the user's index and verify it's an integer
-            removeIndex = int(input())
+            removeIndex = int(input("> "))
             print("")
 
             #If the user entered a valid index to remove, check its quantity
@@ -372,7 +372,7 @@ def saveRecordList(records):
         return
 
     #Prompt for the file to write to
-    recordFile = input("Please enter the name of the csv file to write to.\n")
+    recordFile = input("Please enter the name of the csv file to write to.\n> ")
     print("")
 
     #Verify the file name is valid

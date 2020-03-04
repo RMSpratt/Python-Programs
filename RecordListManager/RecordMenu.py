@@ -39,7 +39,7 @@ def runListEditMenu(records):
         print("7: Return to main menu")
 
         #Get the user's menu choice
-        editChoice = input()
+        editChoice = input("> ")
         print("")
 
         #MENU OPTION ONE: Add record to list
@@ -117,14 +117,14 @@ def runListQueryMenu(records):
         print("6: Return to main menu.")
 
         #Get the user's query choice
-        queryChoice = input()
+        queryChoice = input("> ")
         print("")
 
         #MENU CHOICE ONE: List the records for a given artist
         if (queryChoice == "1"):
 
             #Get the user's selection of the artist to search for
-            artistChoice = input("Please enter the name of the artist to list the records of. \n")
+            artistChoice = input("Please enter the name of the artist to list the records of. \n> ")
             print("")
 
             #Call the query function
@@ -136,7 +136,7 @@ def runListQueryMenu(records):
 
             #Verify that the year entered is an integer
             try:
-                queryYear = int(input())
+                queryYear = int(input("> "))
                 print("")
 
                 #Call the query function
@@ -191,7 +191,7 @@ def runMainMenu(records):
         print("4: Exit")
 
         #Get the user's menu choice
-        mainChoice = input()
+        mainChoice = input("> ")
         print("")
 
         #MENU CHOICE ONE: Launch Edit submenu
@@ -215,7 +215,7 @@ def runMainMenu(records):
                 saveRecordList(records)
 
             print("Would you like to start a new record list (1) or open an existing one? (2)")
-            listChoice = input()
+            listChoice = input("> ")
 
             #If the user wants a new list, clear the list
             if (listChoice == '1'):
@@ -270,7 +270,7 @@ def runStartupMenu():
         print("2: Load a record list from a file.")
 
         #Get the user's menu choice
-        startupChoice = input()
+        startupChoice = input("> ")
         print("")
 
         #MENU CHOICE ONE: Start a new list
