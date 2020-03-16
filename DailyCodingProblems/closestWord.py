@@ -1,6 +1,6 @@
 """
     Author: Reed Spratt
-    Date: March 4th 2020
+    Date: March 16th 2020
 
     Description: This program performs searches for the nearest occurrence of a 'searchWord' from a 'startingWord'.
                  The smallest distance between the two words is returned as the number of words in-between.
@@ -8,7 +8,7 @@
 
                  The string passed to search through is split into a list of strings based on a space.
 
-    Effiency: O(n) To search through the entire list of words in the passed string where n is the number of words in the input string.
+    Efficiency: O(n) To search through the entire list of words in the passed string where n is the number of words in the input string.
               This doesn't account for the effiency of some of the built-in functions used.
 
     Limitations: Punctuation isn't dealt with, i.e. matching "cat" and "cat."
@@ -111,4 +111,5 @@ def mainMenu():
         print("The smallest number of words between \"" + startingWord + "\" and the search word \"" + searchWord + "\" is " + str(smallestDistance))
   
 
+#Starting the program
 mainMenu()
