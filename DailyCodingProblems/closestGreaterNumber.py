@@ -2,7 +2,7 @@
     Author: Reed Spratt
     Last Modified: March 16th 2020
 
-    Description: This program performs searches for the nearest occurrence of a number greater than the one at the passed index.
+    Description: This program searches for the nearest occurrence of a number in a list that is greater than the one at the passed index.
 
     Efficiency: O(1) best-case and O(n) worst-case.
 """

@@ -1,4 +1,15 @@
 """
+    Author: Reed Spratt
+    Last Modified: March 18th 2020
+    Description: This program determines the least amount of coins that can be used to reach a target change amount.
+                 The greedy technique is used to solve this problem, where the biggest denominations are used first.
+
+    Efficiency: Constant
+"""
+
+
+
+"""
     Name: findLeastCoins
     Description: This function determines the least amount of coins needed to make change for the provided
                  amount of change. This function will check for an invalid target amount.
