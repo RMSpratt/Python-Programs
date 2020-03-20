@@ -89,4 +89,5 @@ def mainMenu():
     else:
         print("The value " + searchValue + " was not found in the input list.")
 
+#Run program
 mainMenu()
