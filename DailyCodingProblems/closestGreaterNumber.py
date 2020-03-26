@@ -15,30 +15,30 @@
                  This function searches forwards from the specified element first, and then searches backwards from the specified element.
                  If a greater number isn't found, None is returned instead.
 
-    Parameter: list                         The list of elements to search through
+    Parameter: listElements                 The list of elements to search through
     Parameter: startIndex                   The starting index to search from
     Return: greaterIndex or None
 """
-def findClosestGreaterNumber(list, startIndex):
+def findClosestGreaterNumber(listElements, startIndex):
 
     #Variable to hold the closest greater number's index
     greaterIndex = -1
 
     #If the list passed was empty or the start index to search from is invalid, return from the function
-    if (len(list) == 0 or startIndex > len(list) or startIndex < 0):
+    if (len(listElements) == 0 or startIndex > len(listElements) or startIndex < 0):
         return None
 
     #Get the starting number to find a greater value of
-    startNumber = list[startIndex]
+    startNumber = listElements[startIndex]
 
     #Initialize a loop counter to the passed index
     i = startIndex
 
     #Iterate forwards through the list for the closest greater number
-    while (i < len(list)):
+    while (i < len(listElements)):
 
         #If a greater value is found, save its index
-        if (list[i] > startNumber):
+        if (listElements[i] > startNumber):
             greaterIndex = i
             break
 
@@ -52,7 +52,7 @@ def findClosestGreaterNumber(list, startIndex):
     while (j > 0):
 
         #If a greater value is found and its closer to the starting index, save its index
-        if (list[j] > startNumber and abs(startIndex - j) < abs(startIndex - greaterIndex)):
+        if (listElements[j] > startNumber and abs(startIndex - j) < abs(startIndex - greaterIndex)):
             greaterIndex = j
             break
 
