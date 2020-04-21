@@ -8,7 +8,6 @@ from TreeNode import *
 
 
 
-
 """
     Name: runMain
     Description: The main function for using A* search to solve the 8-Puzzle Problem. 
