@@ -1,18 +1,29 @@
+"""
+    Name: PuzzleBoard
+    Description: This class represents specific PuzzleBoard configurations produced while solving the 8-Puzzle Problem.
+                 The configuration of numbers in the board is defined by the 'layout' string.
+"""
 class PuzzleBoard:
 
+    #The current configuration of the PuzzleBoard including all eight pieces
     layout = []
 
+    #The last move that led to this PuzzleBoard configuration
     lastMove = ""
 
+    #The Manhattan heuristic value of this configuration, as its distance from the goal state or configuration
     heuristicValue = 0
 
+    #ID used for identification purposes when printing the 8-Puzzle solution
     id = -1
 
+    #Constructor for PuzzleBoard objects
     def __init__(self, configuration, parentID):
         self.heuristicValue = 0
         self.id = parentID
         self.layout = []
         self.initializeLayout(configuration)
+
 
 
     """
@@ -196,5 +207,3 @@ class PuzzleBoard:
 
             print("")
         print("")
-
-

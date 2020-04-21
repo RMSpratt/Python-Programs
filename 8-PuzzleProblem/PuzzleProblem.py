@@ -1,10 +1,21 @@
 import PuzzleBoard
 from PuzzleBoard import *
 
+
+
+"""
+    Name: PuzzleProblem
+    Description: This function maintains the initial and goal states for the 8-Puzzle Problem and contains methods for generating successors
+                 of a given PuzzleBoard, and checking if a PuzzleBoard's configuration matches the goal state.
+"""
 class PuzzleProblem():
 
+    #The initial state of the 8-Puzzle Problem
     initState = []
+    
+    #The goal state to reach for the 8-Puzzle Problem
     goalState = []
+
 
 
     """
@@ -24,7 +35,12 @@ class PuzzleProblem():
         else:
             return False
 
-        
+
+
+    """
+        Name: getInitialState
+        Description: Getter function for the initial state for the 8-Puzzle Problem.
+    """
     def getInitialState(self):
         return self.initState
 
@@ -92,8 +108,19 @@ class PuzzleProblem():
         return successorStates
 
 
+
+    """
+        Name: setGoalState
+        Description: Setter function for the 8-Puzzle Problem's goal state or configuration. 
+    """
     def setGoalState(self, goalState):
         self.goalState = goalState
 
+
+
+    """
+        Name: setInitialState
+        Description: Setter function for the 8-Puzzle Problem's initial state or configuration. 
+    """
     def setInitialState(self, initState):
         self.initState = initState
