@@ -19,7 +19,7 @@ class Attribute:
 
 
 
-    #Getter methods
+    #Getter functions
     def getName(self):
         return self.name
 
@@ -35,7 +35,7 @@ class Attribute:
 
 
     """
-        Description: This method gets the index of the passed value in this Attribute's list of values, if it exists.
+        Description: This function gets the index of the passed value in this Attribute's list of values, if it exists.
                     If the value is invalid for the attribute, -1 is returned instead.
     
         Parameter: value                     The value string to search for
@@ -52,7 +52,7 @@ class Attribute:
 
 
     """
-        Description: This method parses the input string into a list of possible values for this attribute.
+        Description: This function parses the input string into a list of possible values for this attribute.
      
         Parameter: valueString              The string containing the values for this attribute
         No return value
@@ -73,12 +73,12 @@ class Attribute:
         
 
     """
-        Description: This utility method prints out this attribute's information. (Mostly for debugging purposes.)
+        Description: This utility function prints out this attribute's information. (Mostly for debugging purposes.)
      
          No parameters
         No return value
     """
     def printAttributeInfo(self):
         print("Attribute name: " + self.name)
-        print("Attribute number of values: " + self.numValues)
-        print("Attribute values: " + self.possibleValues)
+        print("Attribute number of values: " + str(self.numValues))
+        print("Attribute values: " + str(self.possibleValues))

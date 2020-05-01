@@ -17,9 +17,15 @@ class Scheme:
 
 
 
-    #Getter methods
-    def getAllAttributes(self, attributes):
-        combinedAttributes = self.attributes
+    #Getter functions
+    def getAllAttributes(self):
+        combinedAttributes = []
+
+        #Add all of the non-function attributes
+        for attribute in self.attributes:
+            combinedAttributes.append(attribute)
+
+        #Add the function attribute
         combinedAttributes.append(self.functionValue)
 
         return combinedAttributes
@@ -33,7 +39,7 @@ class Scheme:
 
 
     """
-        Description: This method gets the index of a specified attribute as it was loaded from the SchemeFile.
+        Description: This function gets the index of a specified attribute as it was loaded from the SchemeFile.
 
         Parameter: name
         Return: index or -1
@@ -50,7 +56,7 @@ class Scheme:
 
 
     """
-        Description: This method loads all of the attributes to be used for learning the Decision Tree from a scheme file.
+        Description: This function loads all of the attributes to be used for learning the Decision Tree from a scheme file.
 
         Parameter: schemeFile
         Return: No return value 
@@ -73,19 +79,21 @@ class Scheme:
             #Read the entire scheme file
             with open(schemeFile, "r") as fp:
                 
-                fileLine = fp.readLine()
+                fileLine = fp.readline()
+
                 numSchemeAttributes = int(fileLine)
                 
-                fileLine = fp.readLine()
+                fileLine = fp.readline()
 
                 #Read in all of the non-function value attributes
                 for i in range(numSchemeAttributes - 1):
-                    attributeName = fp.readLine()
+                    attributeName = fp.readline()
                     attributeName = attributeName.strip()
-                    attributeNumValues = fp.readLine()
+                    attributeNumValues = fp.readline()
                     attributeNumValues = attributeNumValues.strip()
-                    attributeValues = fp.readLine()
+                    attributeValues = fp.readline()
                     attributeValues = attributeValues.strip()
+                    fp.readline()
 
                     readAttribute = Attribute(attributeName, int(attributeNumValues), attributeValues)
 
@@ -97,16 +105,16 @@ class Scheme:
                     self.attributes.append(readAttribute)
 
                 #Read in the function value information
-                attributeName = fp.readLine()
+                attributeName = fp.readline()
                 attributeName = attributeName.strip()
-                attributeNumValues = fp.readLine()
+                attributeNumValues = fp.readline()
                 attributeNumValues = attributeNumValues.strip()
-                attributeValues = fp.readLine()
+                attributeValues = fp.readline()
                 attributeValues = attributeValues.strip()
 
                 #Create the function value attribute and add it to the list of attributes
                 functionAttribute = Attribute(attributeName, int(attributeNumValues), attributeValues)
-                self.attributes.append(functionAttribute)
+                self.functionValue = functionAttribute
 
                 fp.close()
 
@@ -116,14 +124,16 @@ class Scheme:
             exit(1)
 
         #Inform the user if an error occurred while reading the file
-        except:
+        except IOError:
             print("An error occurred while reading the scheme file " + schemeFile)
             exit(1)
 
+        except:
+            print("Another error occurred.")
 
 
     """
-        Description: This utility method prints out all of the attributes' information read from the SchemeFile.
+        Description: This utility function prints out all of the attributes' information read from the SchemeFile.
 
         No parameters
         No return value

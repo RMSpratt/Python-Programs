@@ -6,6 +6,8 @@ import Sample
 
 from Example import *
 from Node import *
+from Scheme import *
+from Sample import *
 
 class DTLearn:
 
@@ -24,7 +26,7 @@ class DTLearn:
 
 
     """
-        Description: The primary recursive method for forming a decision tree optimized by attribute testing.
+        Description: The primary recursive function for forming a decision tree optimized by attribute testing.
 
         Parameter: g                    The group of examples remaining to be sorted
         Parameter: attrib               The list of attributes remaining to be used to split the remaining examples in the decision tree
@@ -34,7 +36,7 @@ class DTLearn:
     def learnDecisionTree(self, g, attrib, sMajor):
 
         #The list of counts of examples with a specific function value
-        funcValueCounts = []
+        funcValueCounts = [0] * self.numFunctionValues
 
         #The number of examples in the majority set with a specific function value
         majorityValue = 0
@@ -107,9 +109,162 @@ class DTLearn:
             subtr = self.learnDecisionTree(subg, modifiedList, majorityFuncValue)
 
             #Attach the subtree to the root node, and set the link label that attaches the nodes
-            newNode.addChild(subtr)
-            subtr.setParent(newNode)
+            newNode.addChildNode(subtr)
+            subtr.setParentNode(newNode)
             subtr.setLinkLabel(b.getValueForIndex(i))
 
         #Return the tree
         return newNode
+
+
+
+    """
+        Description: THe function for printing the Decision Tree in its entirety.
+
+        Parameter: The list of nodes to print in the tree
+        No return value
+    """
+    def printDecisionTree(self, nodes):
+
+        #Print the root separately using a separate notation (No parent label or link)
+        print(nodes[0].getLabel() + "\n" + str(nodes[0].getIndex()) + "\n")
+
+        #Iterator to go through the remaining nodes to print
+        i = 0
+
+        #Iterate through all of the nodes in the list for the tree
+        while (i < len(nodes)):
+
+            #Variable to hold the current node to print
+            current = nodes[i]
+
+            #If the current node being looked at has child nodes, print them all side by side
+            if (current.getNumChildren() > 0):
+                parentIndices = ""
+                arrowOne = ""
+                arrowTwo = ""
+                arrowHead = ""
+                leafLabel = ""
+                leafIndex = ""
+
+                #Get a reference to the current node's children
+                currentChildren = []
+                
+                #Add all of the node's child nodes
+                for childNode in current.getChildren():
+                    currentChildren.append(childNode)
+
+                #Form a string for each child node
+                for j in range(len(currentChildren)):
+                    parentIndices += str(currentChildren[j].getParentNodeIndex()) + "\t\t"
+                    arrowOne += ("|\t\t")
+
+                    #If the link label name is short, use two tabs
+                    if (len(currentChildren[j].getLinkLabel()) < 7):
+                        arrowTwo += ("|" + currentChildren[j].getLinkLabel() + "\t\t")
+                        
+                    #Else, use one tab
+                    else:
+                        arrowTwo += "|" + currentChildren[j].getLinkLabel() + "\t"
+
+                    arrowHead += "v\t\t"
+
+                    #If the label vname is short, use two tabs
+                    if (len(currentChildren[j].getLabel()) < 7):
+                        leafLabel += (currentChildren[j].getLabel() + "\t\t")
+
+                    #Else, use one tab
+                    else:
+                        leafLabel += (currentChildren[j].getLabel() + "\t")
+
+                    #Add the leaf index
+                    leafIndex += str(currentChildren[j].getIndex()) + "\t\t"
+
+                #Print all of the tree strings formed
+                print(str(parentIndices))
+                print(arrowOne)
+                print(arrowTwo)
+                print(arrowHead)
+                print(leafLabel)
+                print(str(leafIndex) + "\n")
+
+            i += 1
+
+
+    
+    """
+        Description: This function sorts the list of tree nodes found when forming the decision tree.
+
+        No parameters
+        No return value
+    """
+    def sortTreeNodes(self):
+
+        #A variable to hold the list of sorted nodes
+        sortedNodes = []
+
+        #Iterate through all of the nodes found in decision tree learning
+        for i in range(len(self.treeNodes)):
+
+            #The index to insert the node into the list
+            insertIndex = len(sortedNodes)
+
+            #Iterate through the current list of sorted nodes for the proper index to insert the new node
+            for j in range(len(sortedNodes)):
+                if (self.treeNodes[i].getParentNodeIndex() < sortedNodes[j].getParentNodeIndex()):
+                    insertIndex = j
+                    break
+
+            #Add the node to the list of sorted nodes
+            sortedNodes.insert(insertIndex, self.treeNodes[i])
+
+        #Set the class's list of nodes to the sorted list
+        self.treeNodes = sortedNodes
+
+
+
+"""
+    Description: Main function for running Decision Tree Leaening.
+
+    No parameters
+    No return value
+"""
+def runTreeLearning():
+
+    #Variable to hold the list of attributes read in from the SchemeFile    
+    fileAttributes = []
+
+    #Variable to hold the list of examples read in from the DataFile
+    fileExamples = []
+
+    runner = DTLearn()
+
+    #Load the Scheme with the attributes to use
+    runner.fileScheme = Scheme("scheme.txt")
+
+    #Load the Sample with the examples to use
+    runner.fileSample = Sample("sample.txt", runner.fileScheme.getAllAttributes())
+
+    #Get all of the attributes that were read from the DataFile
+    fileAttributes = runner.fileScheme.getNonFunctionAttributes()
+    fileExamples = runner.fileSample.getAllExamples()
+
+    #Get the number of possible function values
+    runner.numFunctionValues = runner.fileScheme.getFunctionValue().getNumValues()
+
+    #Create the ArrayList of tree nodes
+    runner.treeNodes = []
+
+    print("Starting to learn...")
+
+    #Run the Decision Tree learning algorithm
+    runner.learnDecisionTree(fileExamples, fileAttributes, None)
+
+    #Sort the list of nodes
+    runner.sortTreeNodes()
+
+    #Print the decision tree
+    runner.printDecisionTree(runner.treeNodes)
+
+
+runTreeLearning()

@@ -24,7 +24,7 @@ class Sample:
 
 
     """
-        Description: This method returns a count of the examples with a specific function value.
+        Description: This function returns a count of the examples with a specific function value.
 
         Parameter: examples                 The list of examples to search through
         Parameter: value                    The function value being searched here
@@ -38,7 +38,7 @@ class Sample:
         for ex in examples:
 
             #If the function value of an example matches the desired value, increment the count
-            if (ex.getFunctioonValue() == value):
+            if (ex.getFunctionValue() == value):
                 count += 1
 
         return count
@@ -46,7 +46,7 @@ class Sample:
 
 
     """
-        Description: This method returns a list of examples that have a specified attribute value.
+        Description: This function returns a list of examples that have a specified attribute value.
 
         Parameter: searchExample            The list of examples to search through
         Paramter: attribIndex               The index of the specified attribute to check
@@ -58,24 +58,24 @@ class Sample:
         matchingExamples = []
 
         #Iterate through the list of examples
-        for ex in matchingExamples:
+        for ex in searchExamples:
 
             #If the example has the specified attribute value, add it to the list to return
             if ex.getSpecificValue(attribIndex) == value:
                 matchingExamples.append(ex)
-
+    
         return matchingExamples
 
 
 
-    #Getter method for all of the examples read from the DataFile
+    #Getter function for all of the examples read from the DataFile
     def getAllExamples(self):
         return self.exampleSet
 
 
 
     """
-        Description: This method gets the best attribute for testing the remaining examples on in the decision tree.
+        Description: This function gets the best attribute for testing the remaining examples on in the decision tree.
                      The best attribute is selected by the amount of information gained by testing with it.
 
         Parameter: attrib                   The list of attributes remaining to test with
@@ -104,13 +104,13 @@ class Sample:
 
             #Get the amount of information gained after testing with a specific attribute
             gain = info - remainder
-            gain = round(gain)
+            gain = round(gain, 4)
 
             #Checks for rounding errors
             if (gain < 0):
                 gain = 0
 
-            print("Test " + b.getName() + ": info=" + info + " rmd= " + remainder + "gain= " + gain)
+            print("Test " + b.getName() + ": info=" + str(info) + " rmd=" + str(remainder) + " gain=" + str(gain))
 
             #If the amount of information gained is greater than the current maximum amount
             if (gain > maxGain):
@@ -125,7 +125,7 @@ class Sample:
 
 
     """
-        Description: This method gets the remaining amount of information required to answer a query q after splitting
+        Description: This function gets the remaining amount of information required to answer a query q after splitting
                      the input group by some attribute b.
 
         Parameter: b                        The attribute to split the input group of examples by
@@ -136,7 +136,7 @@ class Sample:
     def getRmd(self, b, g, k):
         
         #Get the index corresponding with the current attribute
-        attribIndex = self.schemeAttributes.indexOf(b)
+        attribIndex = self.schemeAttributes.index(b)
 
         #The remaining amount of information required to answer the query after splitting based on attribute b
         remainder = 0
@@ -170,14 +170,14 @@ class Sample:
 
             #Get the remaining information required after this subgroup split
             remainder += probability * info
-            remainder = round(remainder)
+            remainder = round(remainder, 4)
 
         return remainder
 
 
 
     """
-        Description: This method calculates one of two values classified as Task A and Task B respectively.
+        Description: This function calculates one of two values classified as Task A and Task B respectively.
                      Task A calculates I(P(v1), ..., P(vk))
                      Task B calculates I(P(v1 | b = bi), ..., P(vk | b = bi))
 
@@ -197,12 +197,12 @@ class Sample:
         exampleCount = []
 
         #Iterate through each possible function value and count the number of examples in each group
-        for i in range(len(k)):
+        for i in range(k):
             exampleCount.append(self.countExamplesWithFunctionValue(g, i))
 
         #Iterate through each possible function value and calculate the probability of an example in g getting into
         #the subgroup gi based on the count
-        for j in range(len(k)):
+        for j in range(k):
             probability = 0
 
             #If the size of the subgroup is greater than 0, get the probability of an example ending up in that group
@@ -212,7 +212,7 @@ class Sample:
             #Add the amount of information required to solve query q using the new subgroup
             if (probability > 0):
                 info = info - probability * (math.log(probability, 2))
-                info = round(info, 2)
+                info = round(info, 4)
         
         #Return the amount of information required to solve query q
         return info
@@ -220,7 +220,7 @@ class Sample:
 
 
     """
-        Description: Utility method to print all of the examples registered in this sample.
+        Description: Utility function to print all of the examples registered in this sample.
 
         No parameters
         No return value
@@ -237,7 +237,7 @@ class Sample:
 
 
     """
-        Description: The method reads the passed DataFile to load the list of examples for learning the DecisionTree.
+        Description: The function reads the passed DataFile to load the list of examples for learning the DecisionTree.
 
         Parameter: dataFile                 The filepath or file name to open
         Parameter: schemeAttributes         The list of attributes registered from the schemeFile
@@ -252,7 +252,7 @@ class Sample:
 
             #Read the sample file in its entirety
             with open(dataFile, "r") as sampleReader:
-                headerLine = sampleReader.readLine()
+                headerLine = sampleReader.readline()
 
                 #If the header line's variables are out of order or missing, exit the program
                 if (self.verifyHeaderLine(headerLine) == False):
@@ -261,11 +261,12 @@ class Sample:
                     exit(1)
 
                 #Read the first example line in the DataFile
-                fileLine = sampleReader.readLine()
+                fileLine = sampleReader.readline()
 
                 #Read every Example from the DataFile
-                while (fileLine != None):
+                while (fileLine != None and fileLine != ""):
                     fileLine = fileLine.strip()
+                    fileLine = fileLine.replace("\t\t", " ")
                     fileLine = fileLine.replace("\t", " ")
                     fileLine = fileLine.replace(" +", " ")
 
@@ -285,7 +286,7 @@ class Sample:
                     exampleNum += 1
 
                     #Read the next example in the file
-                    fileLine = sampleReader.readLine()
+                    fileLine = sampleReader.readline()
 
         #If the file couldn't be found, inform the user
         except FileNotFoundError:
@@ -298,7 +299,7 @@ class Sample:
 
 
     """
-        Description: This method verifies the header line of variable assignments in the DataFile.
+        Description: This function verifies the header line of variable assignments in the DataFile.
                      The validity of the line is returned as a boolean value.
 
         Parameter: headerLine               The header line to verify
@@ -311,14 +312,16 @@ class Sample:
 
         #Format the header string
         headerLine = headerLine.strip()
-        headerLine.replace("\t", " ")
-        headerLine.replace(" +", " ")
+        headerLine = headerLine.replace("\t", " ")
+        headerLine = headerLine.replace(" +", " ")
 
         #Get all of the attributes in the header string
         headerAttributes = headerLine.split(" ")
 
         #If the number of header attributes doesn't equal the number of attributes in the scheme file, it's invalid
         if (len(headerAttributes) != len(self.schemeAttributes)):
+            print(len(headerAttributes))
+            print(len(self.schemeAttributes))
             return False
 
         #Iterate through the list of attributes in the header string and make sure they match the ones read by the scheme file

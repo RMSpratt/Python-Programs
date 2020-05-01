@@ -24,7 +24,7 @@ class Example:
 
 
 
-    #Getter methods
+    #Getter functions
     def getAttributeValues(self):
         return self.attributeValues
 
@@ -51,7 +51,7 @@ class Example:
 
         #If the number of non-function attribute values doesn't match the number provided in the scheme file, this example is invalid
         if (len(attributeList) != len(schemeAttributes)):
-            print("ERROR: The number of attributes in example " + self.exampleNum + " doesn't match the amount required.")
+            print("ERROR: The number of attributes in example " + str(self.exampleNum) + " doesn't match the amount required.")
             self.attributeValues = None
             return
 

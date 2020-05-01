@@ -18,10 +18,16 @@ class Node:
     def __init__(self, label, index):
         self.label = label
         self.index = index
+        self.children = []
+        self.parent = None
+        self.linkLabel = ""
 
 
 
-    #Getter methods
+    #Getter functions
+    def getChildren(self):
+        return self.children
+
     def getNumChildren(self):
         return len(self.children)
 
@@ -38,11 +44,15 @@ class Node:
         return self.parent
 
     def getParentNodeIndex(self):
-        return self.parent.getIndex()
+
+        if (self.parent != None):
+            return self.parent.getIndex()
+
+        return -1
 
 
 
-    #Setter methods
+    #Setter functions
     def setLinkLabel(self, linkLabel):
         self.linkLabel = linkLabel
 
@@ -53,7 +63,7 @@ class Node:
 
 
     """
-        Description: This method adds the passed child Node to this Node's list of children.
+        Description: This function adds the passed child Node to this Node's list of children.
 
         Parameter: child                        The new child node to be added
         No return value
