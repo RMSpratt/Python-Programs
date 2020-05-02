@@ -1,0 +1,21 @@
+5
+
+Rating
+3
+Low Medium High
+
+Genre	
+4
+Action Comedy Drama Horror
+
+Length
+3
+<80min 80-120min >120min
+
+Awards_Won
+3
+None Few Many
+
+Like
+2
+Yes No

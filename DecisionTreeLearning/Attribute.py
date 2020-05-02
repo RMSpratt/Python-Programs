@@ -1,3 +1,9 @@
+"""
+    Description: This class represents the attributes used for classifying the input set of examples in the decision tree. 
+                 Each attribute has a unique name, along with a list of possible values it can take on. The number of values is also maintained.
+
+                 Functions are primarily getters, including a function to get the index of a specific value for an attribute.
+"""
 class Attribute:
 
     #The name of the attribute
@@ -60,13 +66,15 @@ class Attribute:
     def parseAttributeValues(self, valueString):
         
         #Variable to hold the possible attribute values in the passed string as a list
-        passedValues = valueString.split(" ")
+        passedValues = valueString.split()
 
+        #If the number of passed values doesn't match the amount specified in the file, the attribute is invalid
         if (len(passedValues) != self.numValues):
             print("ERROR: The number of passed values doesn't match the amount required for this attribute.")
             self.possibleValues = None
             return
 
+        #Add all of the possible values for the attribute
         for newValue in passedValues:
             self.possibleValues.append(newValue)
 

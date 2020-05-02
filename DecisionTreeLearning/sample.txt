@@ -1,0 +1,13 @@
+Rating      Genre       Length      Awards_Won	    Like
+Low     Action      >120min     None        No
+High    Comedy      80-120min    Few     Yes
+High    Drama       >120min         Many    No
+Medium  Comedy      <80min          None    Yes
+Low     Horror      80-120min    None    No
+Medium  Action      >120min     Few        No
+Medium  Horror      <80min      Few     Yes
+High    Drama       80-120min    Many    Yes
+Medium  Comedy      <80min      None    Yes
+Low     Comedy      <80min   None    No
+High    Action      >120min     Many    Yes
+Medium  Drama       >120min     None    No

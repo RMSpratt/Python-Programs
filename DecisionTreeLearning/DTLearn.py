@@ -96,7 +96,13 @@ class DTLearn:
         majorityFuncValue = self.fileScheme.getFunctionValue().getValueForIndex(majorityIndex)
 
         #Create a modified list of attributes without the best attribute selected
-        modifiedList = attrib
+        modifiedList = []
+        
+        #Add each remaining attribute to the modified list
+        for i in attrib:
+            modifiedList.append(i)
+
+        #Remove the previously selected best attribute
         modifiedList.remove(b)
 
         #Iterate through every possible value of the attribute b
@@ -237,13 +243,32 @@ def runTreeLearning():
     #Variable to hold the list of examples read in from the DataFile
     fileExamples = []
 
+    #Create a new DTLearn instance for learning the decision tree
     runner = DTLearn()
 
+    print("Please enter the name of the Scheme file to use for learning.")
+    schemeFile = input("> ")
+    print("")
+
+    #If the user didn't provide an input file, inform them
+    if (schemeFile == None or schemeFile == ""):
+        print("A scheme file must be provided.")
+        return
+
+    print("Please enter the name of the Sample file to use for learning.")
+    sampleFile = input("> ")
+    print("")
+
+    #If the user didn't provide an input file, inform them
+    if (sampleFile == None or sampleFile == ""):
+        print("A sample file must be provided.")
+        return
+
     #Load the Scheme with the attributes to use
-    runner.fileScheme = Scheme("scheme.txt")
+    runner.fileScheme = Scheme(schemeFile)
 
     #Load the Sample with the examples to use
-    runner.fileSample = Sample("sample.txt", runner.fileScheme.getAllAttributes())
+    runner.fileSample = Sample(sampleFile, runner.fileScheme.getAllAttributes())
 
     #Get all of the attributes that were read from the DataFile
     fileAttributes = runner.fileScheme.getNonFunctionAttributes()

@@ -1,3 +1,12 @@
+"""
+    Description: This class is used for creating nodes that make up the decision tree for printing purposes. 
+                 Each node represents either a function value as the end classification of examples meeting a list of attributes, or
+                 the name of an attribute for further classification.
+
+                 In addition, all of the nodes excluding the root have a link labeled with the node that led to the current node.
+
+                 Methods include getters, setters, and a method for adding child nodes to the current one.
+"""
 class Node:
 
     #The list of child nodes for this Node

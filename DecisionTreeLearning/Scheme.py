@@ -1,6 +1,15 @@
+import sys
+
 import Attribute
 from Attribute import *
 
+
+
+"""
+    Description: This class contains all of the attributes read in from the scheme file including the function value attribute.
+                 This class has functions for getting the list of attributes with or without the function-value attribute, and a function for
+                 reading the scheme file initially.
+"""
 class Scheme:
 
     #The list of non-function value attributes read from the SchemeFile
@@ -46,8 +55,8 @@ class Scheme:
     """
     def getIndexOfAttribute(self, name):
 
+        #Iterate through the list of attributes and search for a match with the passed attribute name
         for i in range(len(self.attributes)):
-
             if (self.attributes[i].getName() == name):
                 return i
 
@@ -78,11 +87,10 @@ class Scheme:
 
             #Read the entire scheme file
             with open(schemeFile, "r") as fp:
-                
-                fileLine = fp.readline()
 
+                #Read the initial line as the number of attributes in the scheme file
+                fileLine = fp.readline()
                 numSchemeAttributes = int(fileLine)
-                
                 fileLine = fp.readline()
 
                 #Read in all of the non-function value attributes
@@ -95,13 +103,16 @@ class Scheme:
                     attributeValues = attributeValues.strip()
                     fp.readline()
 
+                    #Attempt to create a new attribute
                     readAttribute = Attribute(attributeName, int(attributeNumValues), attributeValues)
 
+                    #If the attribute was invalid, inform the user and exit the system
                     if (readAttribute.getValues() == None):
-                        print("One or more of the attributes in the SchemeFile was invalid.")
+                        print("One or more of the attributes in the SchemeFile was invalid.\nPlease ensure all of the attributes specified are present.")
                         fp.close()
-                        exit(1)
+                        sys.exit(1)
 
+                    #Add the attribute to the list of read attributes
                     self.attributes.append(readAttribute)
 
                 #Read in the function value information
@@ -120,16 +131,19 @@ class Scheme:
 
         #Inform the user if the file couldn't be found
         except FileNotFoundError:
-            print("The scheme file " + schemeFile + " could not be found.")
-            exit(1)
+            print("The scheme file \'" + schemeFile + "\' could not be found.")
+            sys.exit(1)
 
         #Inform the user if an error occurred while reading the file
         except IOError:
-            print("An error occurred while reading the scheme file " + schemeFile)
-            exit(1)
+            print("An error occurred while reading the scheme file \'" + schemeFile + "\'")
+            sys.exit(1)
 
-        except:
-            print("Another error occurred.")
+        #Inform the user if an error occurred while reading the file
+        except ValueError:
+            print("An error occurred while reading the scheme file \'" + schemeFile + "\'")
+            sys.exit(1)
+
 
 
     """

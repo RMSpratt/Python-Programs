@@ -6,6 +6,15 @@ import Example
 from Attribute import *
 from Example import *
 
+
+
+"""
+    Description: This class contains the list of examples to be classified with a decision tree. This class contains a function to read in the examples from a sample file. 
+                 Additional functions are used to get a sublist of examples that have a specific attribute value or function value.
+
+                 This class holds the three primary functions for forming the decision tree, getAttribute, getRmd, and infoFmGp.
+                 These functions are all called from the primary program for learning in DTLearn.
+"""
 class Sample:
 
     #The list of attributes present in every example
@@ -316,7 +325,7 @@ class Sample:
         headerLine = headerLine.replace(" +", " ")
 
         #Get all of the attributes in the header string
-        headerAttributes = headerLine.split(" ")
+        headerAttributes = headerLine.split()
 
         #If the number of header attributes doesn't equal the number of attributes in the scheme file, it's invalid
         if (len(headerAttributes) != len(self.schemeAttributes)):
