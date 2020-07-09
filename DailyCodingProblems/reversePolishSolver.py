@@ -2,7 +2,8 @@
     Author: Reed Spratt
     Date: March 22nd 2020
     
-    Description: This program computes an expression in Reverse Polish Notation.
+    Description: This program computes an expression in Reverse Polish Notation. For those that are unfamiliar with this notation, it is a way of writing arithmetic
+    expressions where the operators follow the operands they affect. Ex. 7 + 8 would be written as 7 8 +. More info: https://en.wikipedia.org/wiki/Reverse_Polish_notation
 
     Limitations: This program treats all operands as integers, so float-values will be rounded.
 """
